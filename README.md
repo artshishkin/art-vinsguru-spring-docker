@@ -10,5 +10,9 @@ Tutorial - Docker From Scratch [For Spring Developers] - from Vinoth Selvaraj (U
 1. [Docker commands](docs/docker-commands.pdf)
 2. [Linux commands cheat sheet](docs/linux-cheat-sheet.pdf)
 
+### Section 4: Docker Crash Course
+
+#### [37. Installing Java Manually in Ubuntu Container](/Section_4_Docker_Crash_Course/37_InstallingJavaManuallyInUbuntuContainer/installing_Java_manually_instruction.md)
+
 [docker]: https://img.shields.io/static/v1?label=&message=Docker&labelColor=white&color=white&logo=docker
 [licence]: https://img.shields.io/github/license/artshishkin/art-vinsguru-spring-docker.svg
