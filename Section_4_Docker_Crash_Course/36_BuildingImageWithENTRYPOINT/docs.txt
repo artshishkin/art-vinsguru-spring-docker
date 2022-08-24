@@ -1,0 +1,11 @@
+CMD commands are ignored by Daemon when there are parameters stated within the docker run command.
+
+ENTRYPOINT instructions are not ignored but instead are appended as command line parameters by treating those as arguments of the command.
+
+with CMD you can override cmd command
+`docker run my_container date` -> will print date instead of default command (print file in 34_BuildingHelloWorldImage example)
+
+with ENTRYPOINT you can NOT override
+`docker run my_container date` -> will execute default command (print file)
+
+
