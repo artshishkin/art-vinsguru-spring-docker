@@ -1,0 +1,12 @@
+server:
+  port: 8090
+
+spring:
+  data:
+    mongodb:
+#      uri: mongodb://job_user:job_password@localhost:27017/job_db #this format has a lot of options
+      host: localhost
+      port: 27017
+      username: job_user
+      password: job_password
+      database: job_db
