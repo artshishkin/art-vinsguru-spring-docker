@@ -36,6 +36,7 @@ public class JobService {
 
     public Mono<JobDto> createNewJob(Mono<JobDto> jobDto) {
         return jobDto
+                .doOnNext(dto -> dto.setId(null))
                 .map(mapper::toEntity)
                 .flatMap(repository::save)
                 .map(mapper::toDto);
