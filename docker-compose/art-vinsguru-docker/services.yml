@@ -1,6 +1,8 @@
 version: "3.8"
 services:
   job-service:
+    profiles:
+      - app
     build:
       context: ../../job-service
       dockerfile: Dockerfile

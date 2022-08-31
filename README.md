@@ -27,6 +27,15 @@ Tutorial - Docker From Scratch [For Spring Developers] - from Vinoth Selvaraj (U
 - **OR**
 - `docker-compose up --build -d`
 
+#### 77. Docker Compose Profile
+
+To start only certain service we have several opportunities 
+1. Use command argument
+   - `docker-compose up mongo -d` - starts only mongo service
+2. Use profiles
+   - `docker-compose up -d` - only mongo_stack starts
+   - `docker-compose --profile=app up -d` - additionally starts services with profile app
+
 [docker]: https://img.shields.io/static/v1?label=&message=Docker&labelColor=white&color=white&logo=docker
 [licence]: https://img.shields.io/github/license/artshishkin/art-vinsguru-spring-docker.svg
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-vinsguru-spring-docker%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
