@@ -1,6 +1,9 @@
 version: "3.8"
 services:
   job-service:
+    build:
+      context: ../../job-service
+      dockerfile: Dockerfile
     image: ${GROUP_ID:-artarkatesoft}/art-vinsguru-job-service:${SERVICE_VERSION:-latest}
     environment:
       "spring.data.mongodb.host": mongo
