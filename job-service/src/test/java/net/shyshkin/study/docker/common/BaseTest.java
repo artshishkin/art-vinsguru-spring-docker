@@ -11,7 +11,7 @@ import org.testcontainers.utility.DockerImageName;
 import org.testcontainers.utility.MountableFile;
 
 @Testcontainers
-public class BaseTest {
+public abstract class BaseTest {
 
     private static final int MONGO_PORT = 27017;
     private static final String INIT_JS = "/docker-entrypoint-initdb.d/init-db.js";
