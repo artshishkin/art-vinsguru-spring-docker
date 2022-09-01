@@ -1,9 +1,8 @@
 package net.shyshkin.study.docker.common;
 
 import net.shyshkin.study.docker.util.VersionUtil;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
@@ -12,7 +11,6 @@ import org.testcontainers.utility.DockerImageName;
 import org.testcontainers.utility.MountableFile;
 
 @Testcontainers
-@ContextConfiguration(initializers = BaseTest.Initializer.class)
 public class BaseTest {
 
     private static final int MONGO_PORT = 27017;
@@ -30,12 +28,8 @@ public class BaseTest {
             .withCopyFileToContainer(MountableFile.forHostPath(INIT_JS_HOST_LOCATION), INIT_JS)
             .waitingFor(Wait.forListeningPort());
 
-    protected static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext applicationContext) {
-            Integer mongoPort = mongo.getMappedPort(MONGO_PORT);
-            System.setProperty("MONGO_PORT", String.valueOf(mongoPort));
-        }
+    @DynamicPropertySource
+    static void mongoProperties(DynamicPropertyRegistry registry) {
+        registry.add("MONGO_PORT", () -> mongo.getMappedPort(MONGO_PORT));
     }
 }
