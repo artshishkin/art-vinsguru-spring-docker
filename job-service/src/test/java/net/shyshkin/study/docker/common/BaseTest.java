@@ -23,13 +23,12 @@ public class BaseTest {
                     .parse("mongo")
                     .withTag(VersionUtil.getVersion("MONGO_VERSION")))
             .withExposedPorts(MONGO_PORT)
-            .withEnv("MONGO_INITDB_ROOT_USERNAME", "admin")
-            .withEnv("MONGO_INITDB_ROOT_PASSWORD", "password")
             .withCopyFileToContainer(MountableFile.forHostPath(INIT_JS_HOST_LOCATION), INIT_JS)
             .waitingFor(Wait.forListeningPort());
 
     @DynamicPropertySource
     static void mongoProperties(DynamicPropertyRegistry registry) {
-        registry.add("MONGO_PORT", () -> mongo.getMappedPort(MONGO_PORT));
+        registry.add("spring.data.mongodb.host", () -> mongo.getHost());
+        registry.add("spring.data.mongodb.port", () -> mongo.getMappedPort(MONGO_PORT));
     }
 }
