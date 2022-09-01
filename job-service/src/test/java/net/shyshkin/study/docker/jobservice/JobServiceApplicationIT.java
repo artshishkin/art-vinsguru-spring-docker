@@ -1,5 +1,6 @@
 package net.shyshkin.study.docker.jobservice;
 
+import lombok.extern.slf4j.Slf4j;
 import net.shyshkin.study.docker.common.BaseTest;
 import net.shyshkin.study.docker.jobservice.dto.JobDto;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 @AutoConfigureWebTestClient
 class JobServiceApplicationIT extends BaseTest {
@@ -32,6 +34,7 @@ class JobServiceApplicationIT extends BaseTest {
                 .expectStatus().isOk()
                 .expectBodyList(JobDto.class)
                 .hasSize(5)
+                .value(jobs -> log.debug("Result: {}", jobs))
                 .value(jobs -> assertThat(jobs)
                         .allSatisfy(job -> assertThat(job).hasNoNullFieldsOrProperties()))
         ;
