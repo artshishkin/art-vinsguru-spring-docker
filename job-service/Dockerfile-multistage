@@ -1,0 +1,17 @@
+FROM maven:3.8.6-eclipse-temurin-11 as builder
+
+WORKDIR build
+
+COPY job-service/src job-service/src
+COPY job-service/pom.xml job-service/pom.xml
+COPY pom.xml pom.xml
+
+RUN mvn clean package
+
+FROM bellsoft/liberica-openjdk-alpine:11.0.16
+
+WORKDIR /usr/share/app
+
+COPY --from=builder build/job-service/target/*.jar app.jar
+
+ENTRYPOINT ["java","-jar","app.jar"]
