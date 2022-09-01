@@ -38,9 +38,11 @@ To start only certain service we have several opportunities
 
 #### 78. Multi Stage Dockerfile
 
-Run:
-- _art-vinsguru-spring-docker\job-service>_ `docker build -t artarkatesoft/art-vinsguru-job-service:multistage -f ./Dockerfile-multistage ./../`
+1. Command line:
+   - _art-vinsguru-spring-docker\job-service>_ `docker build -t artarkatesoft/art-vinsguru-job-service:multistage -f ./Dockerfile-multistage ./../`
 
+2. Docker-compose:
+   - _art-vinsguru-spring-docker\docker-compose\art-vinsguru-docker>_ `docker-compose --profile=multistage-build build`
 
 [docker]: https://img.shields.io/static/v1?label=&message=Docker&labelColor=white&color=white&logo=docker
 [licence]: https://img.shields.io/github/license/artshishkin/art-vinsguru-spring-docker.svg

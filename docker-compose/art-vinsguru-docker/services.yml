@@ -15,3 +15,20 @@ services:
       - mongo
     networks:
       - ${GLOBAL_NETWORK:-services}
+
+  job-service-multistage:
+    profiles:
+      - multistage-build
+    build:
+      context: ../../
+      dockerfile: job-service/Dockerfile-multistage
+    image: ${GROUP_ID:-artarkatesoft}/art-vinsguru-job-service:multistage
+    environment:
+      "spring.data.mongodb.host": mongo
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mongo
+    networks:
+      - ${GLOBAL_NETWORK:-services}
+
