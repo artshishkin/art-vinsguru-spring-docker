@@ -1,7 +1,7 @@
 package net.shyshkin.study.docker.jobservice;
 
 import lombok.extern.slf4j.Slf4j;
-import net.shyshkin.study.docker.common.BaseTest;
+import net.shyshkin.study.docker.compose.BaseTest;
 import net.shyshkin.study.docker.jobservice.dto.JobDto;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

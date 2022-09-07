@@ -1,14 +1,16 @@
 version: "3.8"
 services:
   mongo:
-    image: mongo:${MONGO_VERSION:-latest}
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        MONGO_VERSION: ${MONGO_VERSION:-latest}
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
     ports:
-      - "27017:27017"
-    volumes:
-      - ./data-mongo:/docker-entrypoint-initdb.d
+      - "${MONGO_HOST_PORT:-27017}:27017"
     networks:
       - ${GLOBAL_NETWORK:-elastic}
   express:

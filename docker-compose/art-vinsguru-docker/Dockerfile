@@ -1,0 +1,7 @@
+ARG MONGO_VERSION
+FROM mongo:${MONGO_VERSION}
+
+ENV MONGO_INITDB_ROOT_USERNAME admin
+ENV MONGO_INITDB_ROOT_PASSWORD password
+
+COPY ./data-mongo/ /docker-entrypoint-initdb.d/
