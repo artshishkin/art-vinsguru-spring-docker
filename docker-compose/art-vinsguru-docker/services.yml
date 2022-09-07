@@ -32,3 +32,19 @@ services:
     networks:
       - ${GLOBAL_NETWORK:-services}
 
+  candidate-service:
+    profiles:
+      - app
+    build:
+      context: ../../candidate-service
+      dockerfile: Dockerfile
+    image: ${GROUP_ID:-artarkatesoft}/art-vinsguru-candidate-service:${SERVICE_VERSION:-latest}
+    environment:
+      "spring.data.mongodb.host": mongo
+    ports:
+      - "8091:8080"
+    depends_on:
+      - mongo
+    networks:
+      - ${GLOBAL_NETWORK:-services}
+
