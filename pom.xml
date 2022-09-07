@@ -27,6 +27,7 @@
 
     <modules>
         <module>job-service</module>
+        <module>candidate-service</module>
     </modules>
 
     <dependencyManagement>
