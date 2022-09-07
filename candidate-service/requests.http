@@ -1,0 +1,29 @@
+### Get all candidates (JSON)
+GET http://localhost:8091/candidates
+Accept: application/json
+
+### Get all candidates (Event-Stream)
+GET http://localhost:8091/candidates
+Accept: text/event-stream
+
+### Create new candidate
+POST http://localhost:8091/candidates
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "{{$randomInt}}",
+  "name": "Art {{$uuid}}",
+  "skills": [
+    "c {{$randomInt}}",
+    "mongo",
+    "postgres",
+    "docker"
+  ]
+}
+
+> {% client.global.set("candidate_id", response.body.id); %}
+
+### Get candidate by id
+GET http://localhost:8091/candidates/{{candidate_id}}
+Accept: application/json
