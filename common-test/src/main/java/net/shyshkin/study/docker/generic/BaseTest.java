@@ -1,4 +1,4 @@
-package net.shyshkin.study.docker.common;
+package net.shyshkin.study.docker.generic;
 
 import net.shyshkin.study.docker.util.VersionUtil;
 import org.springframework.test.context.DynamicPropertyRegistry;
