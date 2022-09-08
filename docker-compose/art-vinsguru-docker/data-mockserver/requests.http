@@ -9,3 +9,12 @@ Accept: application/json
 GET http://localhost:1080/some/fake
 Accept: application/json
 
+### Regular Expression
+GET http://localhost:1080/say/something
+
+### Query Parameters
+GET http://localhost:1080/query?q=docker
+
+### Error Endpoint
+GET http://localhost:1080/error/500
+
