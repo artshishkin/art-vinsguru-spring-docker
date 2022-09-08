@@ -1,5 +1,6 @@
 package net.shyshkin.study.docker.candidateservice;
 
+import net.shyshkin.study.docker.candidateservice.client.JobClient;
 import net.shyshkin.study.docker.candidateservice.dto.CandidateDto;
 import net.shyshkin.study.docker.candidateservice.entity.Candidate;
 import net.shyshkin.study.docker.candidateservice.repository.CandidateRepository;
@@ -11,15 +12,19 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
@@ -28,6 +33,9 @@ class CandidateServiceApplicationIT extends BaseTest {
 
     @Autowired
     WebTestClient webTestClient;
+
+    @MockBean
+    JobClient jobClient;
 
     @Autowired
     CandidateRepository repository;
@@ -81,6 +89,7 @@ class CandidateServiceApplicationIT extends BaseTest {
     void getCandidateById() {
         //given
         String id = "1";
+        given(jobClient.getRecommendedJobs(any())).willReturn(Mono.just(Set.of()));
 
         //when
         webTestClient

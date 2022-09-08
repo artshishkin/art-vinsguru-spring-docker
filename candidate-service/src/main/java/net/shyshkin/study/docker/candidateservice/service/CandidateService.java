@@ -1,6 +1,8 @@
 package net.shyshkin.study.docker.candidateservice.service;
 
 import lombok.RequiredArgsConstructor;
+import net.shyshkin.study.docker.candidateservice.client.JobClient;
+import net.shyshkin.study.docker.candidateservice.dto.CandidateDetailsDto;
 import net.shyshkin.study.docker.candidateservice.dto.CandidateDto;
 import net.shyshkin.study.docker.candidateservice.mapper.CandidateMapper;
 import net.shyshkin.study.docker.candidateservice.repository.CandidateRepository;
@@ -14,15 +16,23 @@ public class CandidateService {
 
     private final CandidateRepository repository;
     private final CandidateMapper mapper;
+    private final JobClient jobClient;
 
     public Flux<CandidateDto> getAllCandidates() {
         return repository.findAll()
                 .map(mapper::toDto);
     }
 
-    public Mono<CandidateDto> getCandidateById(String id) {
+    public Mono<CandidateDetailsDto> getCandidateById(String id) {
         return repository.findById(id)
-                .map(mapper::toDto);
+                .map(mapper::toDetailsDto)
+                .flatMap(this::addRecommendedJobs);
+    }
+
+    private Mono<CandidateDetailsDto> addRecommendedJobs(CandidateDetailsDto dto) {
+        return jobClient.getRecommendedJobs(dto.getSkills())
+                .doOnNext(dto::setRecommendedJobs)
+                .thenReturn(dto);
     }
 
     public Mono<CandidateDto> createCandidate(Mono<CandidateDto> newCandidateMono) {

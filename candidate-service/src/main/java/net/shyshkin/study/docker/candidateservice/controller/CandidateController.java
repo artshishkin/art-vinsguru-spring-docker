@@ -1,6 +1,7 @@
 package net.shyshkin.study.docker.candidateservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import net.shyshkin.study.docker.candidateservice.dto.CandidateDetailsDto;
 import net.shyshkin.study.docker.candidateservice.dto.CandidateDto;
 import net.shyshkin.study.docker.candidateservice.service.CandidateService;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class CandidateController {
     }
 
     @GetMapping("{id}")
-    public Mono<CandidateDto> getCandidateById(@PathVariable String id) {
+    public Mono<CandidateDetailsDto> getCandidateById(@PathVariable String id) {
         return service.getCandidateById(id);
     }
 

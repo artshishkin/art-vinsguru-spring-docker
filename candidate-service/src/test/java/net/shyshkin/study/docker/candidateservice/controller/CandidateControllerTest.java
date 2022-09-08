@@ -1,5 +1,6 @@
 package net.shyshkin.study.docker.candidateservice.controller;
 
+import net.shyshkin.study.docker.candidateservice.client.JobClient;
 import net.shyshkin.study.docker.candidateservice.dto.CandidateDto;
 import net.shyshkin.study.docker.candidateservice.entity.Candidate;
 import net.shyshkin.study.docker.candidateservice.repository.CandidateRepository;
@@ -28,6 +29,9 @@ class CandidateControllerTest {
 
     @MockBean
     CandidateRepository repository;
+
+    @MockBean
+    JobClient jobClient;
 
     @Autowired
     WebTestClient webTestClient;
@@ -106,6 +110,7 @@ class CandidateControllerTest {
         //given
         String id = "1";
         given(repository.findById(anyString())).willReturn(Mono.just(mockCandidates[0]));
+        given(jobClient.getRecommendedJobs(any())).willReturn(Mono.just(Set.of()));
 
         //when
         webTestClient
