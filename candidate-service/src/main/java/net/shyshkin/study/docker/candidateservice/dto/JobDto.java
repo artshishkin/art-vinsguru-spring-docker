@@ -1,20 +1,23 @@
 package net.shyshkin.study.docker.candidateservice.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class CandidateDto {
+@Builder
+public class JobDto {
 
     private String id;
-    private String name;
+    private String description;
+    private String company;
     private Set<String> skills;
+    private Integer salary;
+    private Boolean remote;
 
 }

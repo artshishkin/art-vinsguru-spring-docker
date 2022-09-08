@@ -2,19 +2,19 @@ package net.shyshkin.study.docker.candidateservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class CandidateDto {
+public class CandidateDetailsDto extends CandidateDto {
 
-    private String id;
-    private String name;
-    private Set<String> skills;
+    private Set<JobDto> recommendedJobs;
 
 }
