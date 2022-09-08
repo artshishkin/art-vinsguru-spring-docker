@@ -1,0 +1,11 @@
+### Hello World
+GET http://localhost:1080/say/hello
+
+### Return JSON
+GET http://localhost:1080/some/path
+Accept: application/json
+
+### Absent Endpoint - expect 404
+GET http://localhost:1080/some/fake
+Accept: application/json
+
