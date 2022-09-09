@@ -1,0 +1,107 @@
+### Get all candidates (JSON)
+GET http://localhost/api/candidates
+Accept: application/json
+
+### Get all candidates (Event-Stream)
+GET http://localhost/api/candidates
+Accept: text/event-stream
+
+### Get candidate by id 1
+GET http://localhost/api/candidates/1
+Accept: application/json
+
+### Get candidate by id 2
+GET http://localhost/api/candidates/2
+Accept: application/json
+
+### Get candidate by id 3
+GET http://localhost/api/candidates/3
+Accept: application/json
+
+### Create new candidate
+POST http://localhost/api/candidates
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "{{$randomInt}}",
+  "name": "Art {{$uuid}}",
+  "skills": [
+    "c {{$randomInt}}",
+    "mongo",
+    "postgres",
+    "docker"
+  ]
+}
+
+> {% client.global.set("candidate_id", response.body.id); %}
+
+### Get candidate by id
+GET http://localhost/api/candidates/{{candidate_id}}
+Accept: application/json
+
+### Get all jobs (JSON)
+GET http://localhost/api/jobs
+Accept: application/json
+
+### Get all jobs (Event-Stream)
+GET http://localhost/api/jobs
+Accept: text/event-stream
+
+### Get jobs with 1 skill
+GET http://localhost/api/jobs?skills=java
+Accept: application/json
+
+### Get jobs with one of many skills
+GET http://localhost/api/jobs?skills=java,jira
+Accept: application/json
+
+> {% client.global.set("job_id", response.body[0].id); %}
+
+### Get job by id
+GET http://localhost/api/jobs/{{job_id}}
+Accept: application/json
+
+### Create new job
+POST http://localhost/api/jobs
+Accept: application/json
+Content-Type: application/json
+
+{
+  "description": "Senior .Net Developer",
+  "company": "Amazon",
+  "skills": [
+    "c",
+    "mongo",
+    "postgres",
+    "docker"
+  ],
+  "salary": 90000,
+  "remote": true
+}
+
+> {% client.global.set("job_id", response.body.id); %}
+
+### Update job
+PUT http://localhost/api/jobs/{{job_id}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "description": "Senior .Net Developer",
+  "company": "Amazon",
+  "skills": [
+    "c",
+    "mongo",
+    "postgres",
+    "docker"
+  ],
+  "salary": 100000,
+  "remote": false
+}
+
+### Delete job
+DELETE http://localhost/api/jobs/{{job_id}}
+Accept: application/json
+
+
