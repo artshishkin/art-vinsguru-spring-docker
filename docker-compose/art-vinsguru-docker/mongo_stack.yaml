@@ -2,7 +2,7 @@ version: "3.8"
 services:
   mongo:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-mongo
       context: .
       args:
         MONGO_VERSION: ${MONGO_VERSION:-latest}

@@ -1,6 +1,7 @@
 package net.shyshkin.study.docker.candidateservice.client;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.shyshkin.study.docker.candidateservice.dto.JobDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JobClient {
@@ -27,6 +29,7 @@ public class JobClient {
                 .retrieve()
                 .bodyToFlux(JobDto.class)
                 .collect(Collectors.toSet())
+                .doOnError(t -> log.debug("Error while getting jobs with skills", t))
                 .onErrorReturn(Set.of());
     }
 

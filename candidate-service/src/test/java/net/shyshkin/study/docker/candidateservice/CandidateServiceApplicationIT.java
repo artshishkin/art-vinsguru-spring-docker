@@ -1,6 +1,6 @@
 package net.shyshkin.study.docker.candidateservice;
 
-import net.shyshkin.study.docker.candidateservice.client.JobClient;
+import net.shyshkin.study.docker.candidateservice.dto.CandidateDetailsDto;
 import net.shyshkin.study.docker.candidateservice.dto.CandidateDto;
 import net.shyshkin.study.docker.candidateservice.entity.Candidate;
 import net.shyshkin.study.docker.candidateservice.repository.CandidateRepository;
@@ -9,33 +9,36 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Set;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ActiveProfiles("mockserver")
+@TestPropertySource(properties = {
+        "app.job-service.base-url: http://localhost:${MOCK_SERVER_PORT}"
+})
 class CandidateServiceApplicationIT extends BaseTest {
 
     @Autowired
     WebTestClient webTestClient;
-
-    @MockBean
-    JobClient jobClient;
 
     @Autowired
     CandidateRepository repository;
@@ -86,10 +89,9 @@ class CandidateServiceApplicationIT extends BaseTest {
 
     @Test
     @Order(20)
-    void getCandidateById() {
+    void getCandidateById_1() {
         //given
         String id = "1";
-        given(jobClient.getRecommendedJobs(any())).willReturn(Mono.just(Set.of()));
 
         //when
         webTestClient
@@ -99,13 +101,46 @@ class CandidateServiceApplicationIT extends BaseTest {
 
                 //then
                 .expectStatus().isOk()
-                .expectBody(CandidateDto.class)
+                .expectBody(CandidateDetailsDto.class)
                 .value(dto -> assertAll(
-                        () -> assertThat(dto).hasNoNullFieldsOrProperties(),
-                        () -> assertThat(dto.getId()).isEqualTo("1"),
-                        () -> assertThat(dto.getName()).isEqualTo("Artem Shyshkin"),
-                        () -> assertThat(dto.getSkills()).containsExactlyInAnyOrder("java", "git", "spring", "mongo", "postgres", "docker"))
+                                () -> assertThat(dto).hasNoNullFieldsOrProperties(),
+                                () -> assertThat(dto.getId()).isEqualTo("1"),
+                                () -> assertThat(dto.getName()).isEqualTo("Artem Shyshkin"),
+                                () -> assertThat(dto.getSkills()).containsExactlyInAnyOrder("java", "git", "spring", "mongo", "postgres", "docker"),
+                                () -> assertThat(dto.getRecommendedJobs()).isNotEmpty()
+                        )
                 );
+    }
+
+    @ParameterizedTest
+    @Order(25)
+    @MethodSource
+    void getCandidateById_23(String id, String expectedName, String[] expectedSkills) {
+
+        //when
+        webTestClient
+                .get().uri("/candidates/{id}", id)
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange()
+
+                //then
+                .expectStatus().isOk()
+                .expectBody(CandidateDetailsDto.class)
+                .value(dto -> assertAll(
+                                () -> assertThat(dto).hasNoNullFieldsOrProperties(),
+                                () -> assertThat(dto.getId()).isEqualTo(id),
+                                () -> assertThat(dto.getName()).isEqualTo(expectedName),
+                                () -> assertThat(dto.getSkills()).containsExactlyInAnyOrder(expectedSkills),
+                                () -> assertThat(dto.getRecommendedJobs()).isEmpty()
+                        )
+                );
+    }
+
+    static Stream<Arguments> getCandidateById_23() {
+        return Stream.of(
+                Arguments.of("2", "Kateryna Shyshkin", new String[]{"jira", "qa", "git"}),
+                Arguments.of("3", "Arina Shyshkina", new String[]{"english", "scratch", "climbing", "graphity"})
+        );
     }
 
     @Test

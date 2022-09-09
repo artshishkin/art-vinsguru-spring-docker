@@ -1,15 +1,15 @@
 version: "3.8"
 services:
   mockserver:
+    build:
+      context: .
+      dockerfile: Dockerfile-mockserver
+      args:
+        MOCKSERVER_VERSION: "${MOCKSERVER_VERSION:-latest}"
     profiles:
       - mockserver
-    image: mockserver/mockserver:${MOCKSERVER_VERSION:-latest}
-    environment:
-      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/init.json
-    volumes:
-      - "./data-mockserver/01-init.json:/config/init.json"
     ports:
-      - "1080:1080"
+      - "${MOCKSERVER_HOST_PORT:-1080}:1080"
     networks:
       - ${GLOBAL_NETWORK:-services}
 
