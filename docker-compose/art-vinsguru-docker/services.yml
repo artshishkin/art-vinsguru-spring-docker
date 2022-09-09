@@ -9,10 +9,12 @@ services:
     image: ${GROUP_ID:-artarkatesoft}/art-vinsguru-job-service:${SERVICE_VERSION:-latest}
     environment:
       "spring.data.mongodb.host": mongo
-    ports:
-      - "8090:8090"
+#    ports:
+#      - "8090:8090"
     depends_on:
       - mongo
+    deploy:
+      replicas: 2
     networks:
       - ${GLOBAL_NETWORK:-services}
 
@@ -42,11 +44,13 @@ services:
     environment:
       "spring.data.mongodb.host": mongo
       "app.job-service.base-url": http://job-service:8090
-    ports:
-      - "8091:8080"
+#    ports:
+#      - "8091:8080"
     depends_on:
       - mongo
       - job-service
+    deploy:
+      replicas: 2
     networks:
       - ${GLOBAL_NETWORK:-services}
 
