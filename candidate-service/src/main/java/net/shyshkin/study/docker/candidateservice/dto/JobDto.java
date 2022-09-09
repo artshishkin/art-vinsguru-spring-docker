@@ -19,5 +19,6 @@ public class JobDto {
     private Set<String> skills;
     private Integer salary;
     private Boolean remote;
+    private String hostName;
 
 }
