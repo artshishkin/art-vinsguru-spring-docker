@@ -26,7 +26,8 @@ public class JobClient {
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .bodyToFlux(JobDto.class)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet())
+                .onErrorReturn(Set.of());
     }
 
 }

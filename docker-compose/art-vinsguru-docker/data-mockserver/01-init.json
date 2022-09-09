@@ -107,5 +107,36 @@
         }
       ]
     }
+  },
+  {
+    "httpRequest": {
+      "path": "/jobs",
+      "queryStringParameters": {
+        "skills": [
+          "jira",
+          "qa",
+          "git"
+        ]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 404
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/jobs",
+      "queryStringParameters": {
+        "skills": [
+          "english",
+          "scratch",
+          "climbing",
+          "graphity"
+        ]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 500
+    }
   }
 ]

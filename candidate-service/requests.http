@@ -10,6 +10,14 @@ Accept: text/event-stream
 GET http://localhost:8091/candidates/1
 Accept: application/json
 
+### Get candidate by id 2
+GET http://localhost:8091/candidates/2
+Accept: application/json
+
+### Get candidate by id 3
+GET http://localhost:8091/candidates/2
+Accept: application/json
+
 ### Create new candidate
 POST http://localhost:8091/candidates
 Accept: application/json
