@@ -51,5 +51,61 @@
     "httpResponse": {
       "statusCode": 500
     }
+  },
+  {
+    "httpRequest": {
+      "path": "/jobs",
+      "queryStringParameters": {
+        "skills": [
+          "java",
+          "git",
+          "spring",
+          "mongo",
+          "postgres",
+          "docker"
+        ]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": [
+        {
+          "id": "mock-id-1",
+          "description": "Mock Job Description 1",
+          "company": "Amazon",
+          "skills": [
+            "java",
+            "spring",
+            "mongo",
+            "postgres",
+            "docker"
+          ],
+          "salary": 100000,
+          "remote": true
+        },
+        {
+          "id": "mock-id-2",
+          "description": "Mock Job Description 2",
+          "company": "apple",
+          "skills": [
+            "java"
+          ],
+          "salary": 50000,
+          "remote": false
+        },
+        {
+          "id": "mock-id-3",
+          "description": "Mock Job Description 3",
+          "company": "microsoft",
+          "skills": [
+            "java",
+            "jira",
+            "project"
+          ],
+          "salary": 150000,
+          "remote": true
+        }
+      ]
+    }
   }
 ]
