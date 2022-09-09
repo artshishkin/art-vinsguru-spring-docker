@@ -16,6 +16,7 @@
           <list>
             <option value="docker-compose/art-vinsguru-docker/mongo_stack.yaml" />
             <option value="docker-compose/art-vinsguru-docker/services.yml" />
+            <option value="docker-compose/art-vinsguru-docker/api-gateway.yml" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose/art-vinsguru-docker/common.yml" />

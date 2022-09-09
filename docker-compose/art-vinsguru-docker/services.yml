@@ -46,6 +46,7 @@ services:
       - "8091:8080"
     depends_on:
       - mongo
+      - job-service
     networks:
       - ${GLOBAL_NETWORK:-services}
 

@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  api-gateway:
+    image: nginx:${NGINX_VERSION:-latest}
+    profiles:
+      - app
+    ports:
+      - "80:80"
+    depends_on:
+      - job-service
+      - candidate-service
+    volumes:
+      - ./data-api-gateway/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - ${GLOBAL_NETWORK:-services}
+
