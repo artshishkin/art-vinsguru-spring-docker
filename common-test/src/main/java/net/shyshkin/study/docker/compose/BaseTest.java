@@ -42,7 +42,7 @@ public abstract class BaseTest {
                 .withEnv(MOCKSERVER.getHostPortEnvVariable(), MOCKSERVER.getHostPort())
                 .withEnv("COMPOSE_PROFILES", "mockserver")
                 .withExposedService(MONGO.getName(), MONGO.getPort(), Wait.forListeningPort())
-                .withExposedService(MOCKSERVER.getName(), MOCKSERVER.getPort(), Wait.forListeningPort())
+                .withExposedService(MOCKSERVER.getName(), MOCKSERVER.getPort(), Wait.forHttp("/health").forStatusCode(200))
                 .start();
         registry.add("spring.data.mongodb.host", () -> composeContainer.getServiceHost(MONGO.getName(), MONGO.getPort()));
         registry.add("spring.data.mongodb.port", () -> composeContainer.getServicePort(MONGO.getName(), MONGO.getPort()));
