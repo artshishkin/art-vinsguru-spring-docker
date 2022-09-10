@@ -84,6 +84,35 @@
 <script>
 
     // TO_DO
+    let jobNav = document.getElementById('job-nav');
+    let jobTable = document.getElementById('job-list');
+    let candidateNav = document.getElementById('candidate-nav');
+    let candidateTable = document.getElementById('candidate-list');
+
+    jobNav.addEventListener("click", () => fetchJobs());
+
+    const fetchJobs = async () => {
+        const uri = `/api/jobs`;
+        const response = await fetch(uri);
+        const jobs = await response.json();
+        jobTable.replaceChildren();
+        jobs.forEach((job, index) => addJobToTable(job, index + 1));
+    };
+
+    const addJobToTable = (job, index) => {
+        const template = `
+            <th scope="row">${index}</th>
+            <td class="text-capitalize">${job.description}</td>
+            <td class="text-capitalize">${job.company}</td>
+            <td>${job.salary}</td>
+            <td>${job.remote ? "Yes" : "No"}</td>
+            <td class="text-capitalize">${job.skills}</td>
+            <td>${job.hostName}</td>
+        `;
+        const rowElement = document.createElement("tr");
+        rowElement.innerHTML = template;
+        jobTable.appendChild(rowElement);
+    };
 
 </script>
 </body>
