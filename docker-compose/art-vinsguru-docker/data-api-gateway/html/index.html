@@ -83,18 +83,19 @@
 
 <script>
 
-    // TO_DO
     let jobNav = document.getElementById('job-nav');
     let jobTable = document.getElementById('job-list');
     let candidateNav = document.getElementById('candidate-nav');
     let candidateTable = document.getElementById('candidate-list');
 
     jobNav.addEventListener("click", () => fetchJobs());
+    candidateNav.addEventListener("click", () => fetchCandidates());
 
     const fetchJobs = async () => {
         const uri = `/api/jobs`;
         const response = await fetch(uri);
         const jobs = await response.json();
+        activateElement(jobNav);
         jobTable.replaceChildren();
         jobs.forEach((job, index) => addJobToTable(job, index + 1));
     };
@@ -113,6 +114,34 @@
         rowElement.innerHTML = template;
         jobTable.appendChild(rowElement);
     };
+
+    const fetchCandidates = async () => {
+        const uri = `/api/candidates`;
+        const response = await fetch(uri);
+        const candidates = await response.json();
+        activateElement(candidateNav);
+        candidateTable.replaceChildren();
+        candidates.forEach((candidate, index) => addCandidateToTable(candidate, index + 1));
+    };
+
+    const addCandidateToTable = (candidate, index) => {
+        const template = `
+            <th scope="row">${index}</th>
+            <td class="text-capitalize">${candidate.name}</td>
+            <td class="text-capitalize">${candidate.skills}</td>
+            <td>${candidate.hostName}</td>
+        `;
+        const rowElement = document.createElement("tr");
+        rowElement.innerHTML = template;
+        candidateTable.appendChild(rowElement);
+    };
+
+    const activateElement = (ele) => {
+        document.querySelector("nav > a.active").classList.remove("active", "disabled");
+        ele.classList.add("active", "disabled");
+    };
+
+    window.addEventListener("load", () => fetchJobs());
 
 </script>
 </body>
