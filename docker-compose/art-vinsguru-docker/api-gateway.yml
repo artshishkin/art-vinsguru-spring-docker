@@ -11,6 +11,7 @@ services:
       - candidate-service
     volumes:
       - ./data-api-gateway/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./data-api-gateway/html/index.html:/usr/share/nginx/html/index.html:ro
     networks:
       - ${GLOBAL_NETWORK:-services}
 
