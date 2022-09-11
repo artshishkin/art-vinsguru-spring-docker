@@ -9,6 +9,8 @@ services:
     image: ${GROUP_ID:-artarkatesoft}/art-vinsguru-job-service:${SERVICE_VERSION:-latest}
     environment:
       "spring.data.mongodb.host": mongo
+      "logging.level.net.shyshkin": DEBUG
+      "spring.profiles.active": json_log
 #    ports:
 #      - "8090:8090"
     depends_on:
@@ -47,6 +49,8 @@ services:
     environment:
       "spring.data.mongodb.host": mongo
       "app.job-service.base-url": http://job-service:8090
+      "logging.level.net.shyshkin": DEBUG
+      "spring.profiles.active": json_log
 #    ports:
 #      - "8091:8080"
     depends_on:
