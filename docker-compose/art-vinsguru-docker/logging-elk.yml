@@ -1,4 +1,9 @@
 version: "3.8"
+
+volumes:
+  volume-kibana:
+  volume-elastic:
+
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION:-latest}
@@ -13,6 +18,26 @@ services:
       interval: 10s
       timeout: 5s
       retries: 6
+    volumes:
+      - volume-elastic:/usr/share/elasticsearch/data
     networks:
       - ${GLOBAL_NETWORK:-elastic}
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_VERSION:-latest}
+    profiles:
+      - logging-elk
+    ports: ["5601:5601"]
+    restart: on-failure
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    volumes:
+      - volume-kibana:/usr/share/kibana
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - ${GLOBAL_NETWORK:-elastic}
+
+
 
