@@ -48,6 +48,10 @@ To start only certain service we have several opportunities
 
 - `mvn spring-boot:build-image`
 
+### Certificate of Completion
+
+![Certificate of completion](Certificate/UC-DockerFromScratch-Vinsguru.jpg "Certificate of Completion")
+
 [docker]: https://img.shields.io/static/v1?label=&message=Docker&labelColor=white&color=white&logo=docker
 [licence]: https://img.shields.io/github/license/artshishkin/art-vinsguru-spring-docker.svg
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-vinsguru-spring-docker%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
