@@ -48,6 +48,19 @@ To start only certain service we have several opportunities
 
 - `mvn spring-boot:build-image`
 
+### 8 Consolidated Logging with ELK Stack
+
+#### 8.2 Running elastic search with docker
+
+1. Start full stack with elastic cluster
+   - `docker-compose --profile=app --profile=logging-elk up`
+2. In case of error in Windows
+   - `max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]`
+   - use commands for Windows
+   - `wsl -d docker-desktop`
+   - `sysctl -w vm.max_map_count=262144`
+   - or permanently add `vm.max_map_count = 262144` to __/etc/sysctl.conf__
+
 ### Certificate of Completion
 
 ![Certificate of completion](Certificate/UC-DockerFromScratch-Vinsguru.jpg "Certificate of Completion")

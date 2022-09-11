@@ -7,7 +7,7 @@
           <list>
             <DockerEnvVarImpl>
               <option name="name" value="COMPOSE_PROFILES" />
-              <option name="value" value="app" />
+              <option name="value" value="app,logging-elk" />
             </DockerEnvVarImpl>
           </list>
         </option>
@@ -17,6 +17,7 @@
             <option value="docker-compose/art-vinsguru-docker/mongo_stack.yaml" />
             <option value="docker-compose/art-vinsguru-docker/services.yml" />
             <option value="docker-compose/art-vinsguru-docker/api-gateway.yml" />
+            <option value="docker-compose/art-vinsguru-docker/logging-elk.yml" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose/art-vinsguru-docker/common.yml" />
