@@ -61,6 +61,26 @@ To start only certain service we have several opportunities
    - `sysctl -w vm.max_map_count=262144`
    - or permanently add `vm.max_map_count = 262144` to __/etc/sysctl.conf__
 
+####  8.6. View Logs in Kibana
+
+1. Start full stack with elastic cluster
+   - `docker-compose --profile=app --profile=logging-elk up -d`
+2.  View `filebeat` logs
+   -  Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rwxrwxrwx" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')
+   -  in Windows we can disable the permission checking by adding:
+      -  `command: filebeat -e -strict.perms=false`
+3.  View logs
+   -  localhost: 5601
+   -  Kibana -> Discover ->
+   -  Create index pattern
+      -  Your index pattern matches 2 sources.
+      -  Index pattern name: `filebeat*`
+      -  Next step
+   -  Select a primary time field for use with the global time filter.
+      -  `@timestamp`
+      -  Create index pattern
+   -  Kibana -> Discover
+
 ### Certificate of Completion
 
 ![Certificate of completion](Certificate/UC-DockerFromScratch-Vinsguru.jpg "Certificate of Completion")
