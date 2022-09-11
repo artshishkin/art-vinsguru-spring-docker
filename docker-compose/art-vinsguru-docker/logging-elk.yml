@@ -39,5 +39,27 @@ services:
     networks:
       - ${GLOBAL_NETWORK:-elastic}
 
+  #  docker run -d \
+  #  --name=filebeat \
+  #  --user=root \
+  #  --volume="$(pwd)/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro" \
+  #  --volume="/var/lib/docker/containers:/var/lib/docker/containers:ro" \
+  #  --volume="/var/run/docker.sock:/var/run/docker.sock:ro" \
+  #  docker.elastic.co/beats/filebeat:7.10.2 filebeat -e -strict.perms=false \
+  #  -E output.elasticsearch.hosts=["elasticsearch:9200"]
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION:-latest}
+    command: filebeat -e -strict.perms=false
+    profiles:
+      - logging-elk
+    volumes:
+      - ./data-filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
+      -  /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+      -  /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+    user: root
+    restart: on-failure
+    networks:
+      - ${GLOBAL_NETWORK:-elastic}
+
 
 
