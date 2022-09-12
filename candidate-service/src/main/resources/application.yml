@@ -2,6 +2,8 @@ server:
   port: 8091
 
 spring:
+  application:
+    name: @project.artifactId@
   data:
     mongodb:
 #      uri: mongodb://candidate_user:candidate_password@localhost:27017/candidate_db #this format has a lot of options
