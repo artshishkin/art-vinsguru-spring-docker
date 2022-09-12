@@ -11,6 +11,7 @@ services:
       "spring.data.mongodb.host": mongo
       "logging.level.net.shyshkin": DEBUG
       "spring.profiles.active": json_log
+      "spring.zipkin.base-url": http://zipkin:9411
 #    ports:
 #      - "8090:8090"
     depends_on:
@@ -51,6 +52,7 @@ services:
       "app.job-service.base-url": http://job-service:8090
       "logging.level.net.shyshkin": DEBUG
       "spring.profiles.active": json_log
+      "spring.zipkin.base-url": http://zipkin:9411
 #    ports:
 #      - "8091:8080"
     depends_on:
