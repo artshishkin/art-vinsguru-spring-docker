@@ -15,10 +15,12 @@ Tutorial - Docker From Scratch [For Spring Developers] - from Vinoth Selvaraj (U
 1. [Docker commands](docs/docker-commands.pdf)
 2. [Linux commands cheat sheet](docs/linux-cheat-sheet.pdf)
 
+---
 ### Section 4: Docker Crash Course
 
 #### [37. Installing Java Manually in Ubuntu Container](/Section_4_Docker_Crash_Course/37_InstallingJavaManuallyInUbuntuContainer/installing_Java_manually_instruction.md)
 
+---
 ### Section 6: Dockerizing Spring Application
 
 #### 76. Docker Compose Build Option
@@ -48,6 +50,7 @@ To start only certain service we have several opportunities
 
 - `mvn spring-boot:build-image`
 
+---
 ### 8 Consolidated Logging with ELK Stack
 
 #### 8.2 Running elastic search with docker
@@ -80,8 +83,26 @@ To start only certain service we have several opportunities
       -  `@timestamp`
       -  Create index pattern
    -  Kibana -> Discover
+---
+### 11 Distributed Tracing with Zipkin
 
-### Certificate of Completion
+#### 11.5 View trace and dependencies in Zipkin
+
+- Find a trace
+
+![Zipkin tracing](docs/zipkin-screenshot.jpg)
+
+- View dependencies (_other microservices_)
+
+![Zipkin dependencies](docs/zipkin-dependencies.jpg)
+
+- Find logs of a request by **trace_id** in Kibana
+
+![Kibana Logs](docs/kibana-search-by-trace-id.jpg)
+
+---
+
+### _Certificate of Completion_
 
 ![Certificate of completion](Certificate/UC-DockerFromScratch-Vinsguru.jpg "Certificate of Completion")
 
