@@ -1,0 +1,26 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="mongo+zipkin" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <option name="envFilePath" value="C:\Users\Admin\IdeaProjects\Study\VinothSelvaraj\art-vinsguru-spring-docker\docker-compose\art-vinsguru-docker\.env" />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="COMPOSE_PROFILES" />
+              <option name="value" value="tracing" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--build" />
+        <option name="secondarySourceFiles">
+          <list>
+            <option value="docker-compose/art-vinsguru-docker/mongo_stack.yaml" />
+            <option value="docker-compose/art-vinsguru-docker/tracing.yml" />
+          </list>
+        </option>
+        <option name="sourceFilePath" value="docker-compose/art-vinsguru-docker/common.yml" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
