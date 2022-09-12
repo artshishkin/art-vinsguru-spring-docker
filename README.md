@@ -100,6 +100,16 @@ To start only certain service we have several opportunities
 
 ![Kibana Logs](docs/kibana-search-by-trace-id.jpg)
 
+#### 11.6 Persisting Zipkin data into Elasticsearch
+
+1. Add index pattern into Kibana
+   - Menu &rarr; Management &rarr; Stack Management &rarr; 
+   - Index Patterns &rarr; Create index pattern &rarr; `zipkin*`
+2. Discover zipkin data
+   - Discover &rarr; Change index pattern &rarr; `zipkin*`
+   - by `traceId` 
+     - i.e. `traceId : "13eb59a6cfc10547"` (choose one)
+
 ---
 
 ### _Certificate of Completion_
