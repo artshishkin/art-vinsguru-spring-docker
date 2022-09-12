@@ -1,0 +1,7 @@
+MONGO_VERSION: 4.2.22
+SERVICE_VERSION: latest
+MOCKSERVER_VERSION: 5.14.0
+NGINX_VERSION: 1.23.1-alpine
+ELASTIC_VERSION: 7.17.3
+ZIPKIN_VERSION: 2.23.18
+# When change version you must duplicate them into env-versions.yaml for correct badges
