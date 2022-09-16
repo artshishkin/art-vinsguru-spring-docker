@@ -59,6 +59,12 @@ To start only certain service we have several opportunities
 - `mvn spring-boot:build-image`
 
 ---
+### Section 9: Mockserver
+
+Mockserver dashboard
+- [http://localhost:1080/mockserver/dashboard](http://localhost:1080/mockserver/dashboard)
+
+---
 ### 8 Consolidated Logging with ELK Stack
 
 #### 8.2 Running elastic search with docker
